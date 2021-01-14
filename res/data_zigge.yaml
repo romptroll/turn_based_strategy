@@ -1,0 +1,94 @@
+map:
+  -
+    path: "res/maps/back_new.yaml"
+  -
+    path: "res/maps/fore_new.yaml"
+atlas:
+  -
+    path: "res/textures/tile_atlas.png"
+textures:
+  -
+    name: "water"
+    bounds:
+      - 0
+      - 0
+      - 16
+      - 16
+  -
+    name: "grass"
+    bounds:
+      - 0
+      - 16
+      - 16
+      - 16
+  -
+    name: "stone"
+    bounds:
+      - 16
+      - 16
+      - 16
+      - 16
+  -
+    name: "city"
+    bounds:
+      - 48
+      - 0
+      - 16
+      - 16
+  -
+    name: "rocks"
+    bounds:
+      - 32
+      - 0
+      - 16
+      - 16
+  -
+    name: "forrest"
+    bounds:
+      - 32
+      - 16
+      - 16
+      - 16
+  -
+    name: "lava"
+    bounds:
+      - 0
+      - 32
+      - 16
+      - 16
+tiles:
+  -
+    texture: "grass"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "water"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "stone"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "city"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "forrest"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "rocks"
+    r: 1.0
+    g: 1.0
+    b: 1.0
+  -
+    texture: "lava"
+    r: 1.0
+    g: 1.0
+    b: 1.0

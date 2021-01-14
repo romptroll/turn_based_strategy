@@ -1,0 +1,38 @@
+---
+atlas:
+  - path: res/textures/tile_atlas.png
+map:
+  - path: res/maps/back_new.yaml
+  - path: res/maps/fore_new.yaml
+textures:
+  - name: water
+    bounds:
+      - 0
+      - 0
+      - 16
+      - 16
+  - name: grass
+    bounds:
+      - 0
+      - 16
+      - 16
+      - 16
+  - name: stone
+    bounds:
+      - 16
+      - 16
+      - 16
+      - 16
+  - bounds:
+      - 48
+      - 0
+      - 16
+      - 16
+    name: city
+  - name: rocks
+    bounds:
+      - 32
+      - 0
+      - 16
+      - 16
+  - name: forrest
