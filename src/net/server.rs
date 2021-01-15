@@ -29,9 +29,10 @@ use std::collections::HashMap;
 use std::io::Write;
 use std::io::Read;
 
-use engine::core::error_log;
+use engine::core::{error_log, info_log};
+use packet::{Packet, PacketID};
 
-use crate::net::packet;
+use crate::{entities::player::Player, io::resource::Resource, net::packet};
 
 pub struct Server {
     listener: TcpListener,
@@ -133,5 +134,52 @@ impl Server {
 
     pub fn num_clients(&self) -> usize {
         self.clients.len()
+    }
+}
+
+pub struct ServerManager {
+    server: Server,
+    players: HashMap<SocketAddr, Player>,
+}
+
+impl ServerManager {
+    pub fn new(server: Server) -> ServerManager {
+        ServerManager {
+            server,
+            players: HashMap::new(),
+        }
+    }
+
+    pub fn add_player(&mut self, player: Player) {
+        self.players.insert(player.addr, player);
+    }
+
+    pub fn run(mut self) {
+        loop {
+            self.server.poll_new_client();
+            
+            for (p, addr) in self.server.poll_data() {
+                match p.id {
+                    PacketID::Name => {
+                        //players.insert(addr, String::from(std::str::from_utf8(&p.data).unwrap()));
+                        info_log!("Player: {} has joined!", String::from(std::str::from_utf8(&p.data).unwrap()));
+                        self.start();
+                    },
+                    PacketID::Start => {
+                        //start_game(&mut server, &mut players);
+                    },
+                    _ => {},
+                }
+            }
+        }
+    }
+
+    pub fn start(&mut self) {
+        let data = std::fs::read_to_string("res/data_jt.yaml").unwrap();
+        
+        let map = std::fs::read_to_string(Resource::from_string(&data).get("map").unwrap().as_vec().unwrap()[0].get("path").unwrap().as_str().unwrap()).unwrap();
+        
+        self.server.send_data(Packet::new(PacketID::Data, data.bytes().collect()));
+        self.server.send_data(Packet::new(PacketID::Map, map.bytes().collect()));
     }
 }

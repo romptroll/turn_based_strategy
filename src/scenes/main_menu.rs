@@ -1,5 +1,3 @@
-use engine::{core::window::Window, game::GameData, gui::gui::GUI, scene::Scene};
-
 /*
  *   Copyright (c) 2021 Ludwig Bogsveen
  *   All rights reserved.
@@ -23,21 +21,54 @@ use engine::{core::window::Window, game::GameData, gui::gui::GUI, scene::Scene};
  *   SOFTWARE.
  */
 
+use engine::{core::window::Window, game::GameData, gui::{comps::Button, gui::GUI}, scene::Scene};
+
 pub struct MainMenuScene {
     gui: GUI,
-    
+    pub btn_play: Button,
+    pub btn_editor: Button,
+    pub btn_exit: Button,
 }
 
 impl MainMenuScene {
     pub fn new(win: &mut Window) -> MainMenuScene {
+        let mut btn_play = Button::new();
+        btn_play.x = -0.3;
+        btn_play.y = 0.4;
+        btn_play.width = 0.6;
+        btn_play.height = 0.3;
+
+        let mut btn_editor = Button::new();
+        btn_editor.x = -0.3;
+        btn_editor.y = 0.0;
+        btn_editor.width = 0.6;
+        btn_editor.height = 0.3;
+
+
+        let mut btn_exit = Button::new();
+        btn_exit.x = -0.3;
+        btn_exit.y = -0.4;
+        btn_exit.width = 0.6;
+        btn_exit.height = 0.3;
+
+
+
         MainMenuScene {
             gui: GUI::new(win),
+            btn_play,
+            btn_editor,
+            btn_exit,
         }
     }
 }
 
 impl Scene for MainMenuScene {
     fn on_render(&mut self, _gd: &mut GameData) {
-        
+
+        self.gui.button(&mut self.btn_play);
+        self.gui.button(&mut self.btn_editor);
+        self.gui.button(&mut self.btn_exit);
+
+        self.gui.update();
     }
 }

@@ -26,7 +26,8 @@ use std::io::Write;
 use std::io::Read;
 use std::option::Option;
 
-use engine::core::error_log;
+use engine::core::{error_log, info_log};
+use packet::{Packet, PacketID};
 
 use crate::net::packet;
 
@@ -95,6 +96,53 @@ impl Client {
             for packet in packets {
                 self.send_single_packet(packet);
             }
+        }
+    }
+}
+
+pub struct ClientHandler {
+    client: Option<Client>,
+    pub data_yaml: String,
+    pub map_yaml: String,
+    pub start: bool,
+}
+
+impl ClientHandler {
+    pub fn new() -> ClientHandler {
+        ClientHandler {
+            client: None,
+            data_yaml: String::new(),
+            map_yaml: String::new(),
+            start: false,
+        }
+    }
+
+    pub fn send_name(&mut self, name: &str) {
+        self.client.as_mut().unwrap().send_data(Packet::new(PacketID::Name, unsafe { name.to_string().as_mut_vec().clone() }));
+    }
+
+    pub fn update(&mut self) {
+        match self.client.as_mut() {
+            Some(client) => {
+                match client.poll_data() {
+                    Some(packet) => {
+                        match packet.id {
+                            packet::PacketID::Data => {
+                                self.data_yaml = String::from_utf8(packet.data).unwrap();
+                                //info_log!("Data: {}", self.data_yaml);
+                            }
+                            packet::PacketID::Map => {
+                                self.map_yaml = String::from_utf8(packet.data).unwrap();
+                                //info_log!("Map: {}", self.map_yaml);
+                            }
+                            packet::PacketID::Start => {}
+                            _ => {}
+                        }
+                    }
+                    None => {}
+                }
+            }
+            _ => {}
         }
     }
 }

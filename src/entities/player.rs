@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2020 Ludwig Bogsveen
+ *   Copyright (c) 2021 Ludwig Bogsveen
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,44 +21,9 @@
  *   SOFTWARE.
  */
 
-use std::rc::Rc;
-use std::any::Any;
-use std::option::Option;
+use std::net::SocketAddr;
 
-use crate::net::packet::Packet;
-
-pub struct EventHolder {
-    event: Rc<dyn Any>,
-}
-
-impl EventHolder {
-    pub fn new<T: Any>(event: T) -> EventHolder {
-        EventHolder {
-            event: Rc::new(event)
-        }
-    }
-
-    pub fn downcast_ref<T: Any>(&self) -> Option<&T> {
-        self.event.downcast_ref::<T>()
-    }
-
-    pub fn is<T: Any>(&self) -> bool {
-        self.event.is::<T>()
-    }
-}
-
-impl Clone for EventHolder {
-    fn clone(&self) -> Self {
-        EventHolder {
-            event: Rc::clone(&self.event)
-        }
-    }
-}
-
-pub struct ChangeCurrentSceneEvent {
-    pub scene_name: String,
-}
-
-pub struct ClientPacketEvent {
-    pub packet: Packet,
+pub struct Player {
+    pub addr: SocketAddr,
+    pub name: String,
 }
