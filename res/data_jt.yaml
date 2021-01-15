@@ -1,50 +1,40 @@
 map:
-  -
-    path: "res/maps/jt.yaml"
+  - path: "res/maps/jt.yaml"
 atlas:
-  -
-    path: "res/textures/jt.png"
+  - path: "res/textures/jt.png"
 textures:
-  -
-    name: "dirt"
+  - name: "stone"
     bounds:
       - 0
       - 0
       - 16
       - 24
-  -
-    name: "sand"
+  - name: "dirt"
     bounds:
       - 16
       - 0
       - 16
       - 24
-  -
-    name: "stone"
+  - name: "sand"
     bounds:
-      - 32
       - 0
+      - 24
       - 16
       - 24
-  -
-    name: "castle"
+  - name: "castle"
     bounds:
-      - 48
-      - 0
       - 16
+      - 24
       - 16
+      - 24
 tiles:
-  -
-    texture: "dirt"
+  - texture: "stone"
     y_off: -8.0
     y_scl: 1.5
-  -
-    texture: "sand"
+  - texture: "dirt"
     y_off: -8.0
     y_scl: 1.5
-  -
-    texture: "stone"
+  - texture: "sand"
     y_off: -8.0
     y_scl: 1.5
-  -
-    texture: "castle"
+  - texture: "castle"
