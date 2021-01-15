@@ -36,7 +36,7 @@ mod camera;
 
 use engine::{core::{info_log, input::{Input, Key, Mouse}, warn_log, window::{Action, Window}}, game::{Game, GameContainer, GameData}, renderer::{color::BLACK, graphics::Graphics, graphics3d::Graphics3D, renderer::{init_gl, std_renderer::{BlendMode, Capability, blend_func, enable}}, texture::{Texture, TextureRegion}}, scene::{Scene, SceneManager}};
 use map::*;
-use scenes::editor::*;
+use scenes::{editor::*, game::GameScene};
 use net::{packet::*, client::Client, server::Server};
 use io::resource::*;
 
@@ -332,6 +332,7 @@ fn main() {
 
     let mut scene_manager = SceneManager::new();
     scene_manager.add_scene(Box::new(EditorScene::new(&mut win)), "editor");
+    scene_manager.add_scene(Box::new(GameScene::new(&mut win)), "game");
 
     //scene_manager.add_scene(load_editor(&mut win));
     scene_manager.set_current_scene("editor");

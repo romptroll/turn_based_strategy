@@ -46,14 +46,14 @@ pub struct Tile {
 }
 
 impl Tile {
-    pub fn new(color: Color, texture: TextureRegion, x_off: f32, y_off: f32, x_scl: f32, y_scl: f32) -> Tile {
+    pub fn new(color: Color, texture: TextureRegion) -> Tile {
         Tile {
             color,
             texture,
-            x_off,
-            y_off,
-            x_scl,
-            y_scl,
+            x_off: 0.0,
+            y_off: 0.0,
+            x_scl: 0.0,
+            y_scl: 0.0,
         }
     }
 

@@ -1,8 +1,6 @@
 map:
   -
-    path: "res/maps/back_new.yaml"
-  -
-    path: "res/maps/fore_new.yaml"
+    path: "res/maps_zigge/map.yaml"
 atlas:
   -
     path: "res/textures/tile_atlas.png"

@@ -26,12 +26,20 @@ pub struct Camera {
     pub y: f32,
     pub w: f32,
     pub h: f32,
+    pressed_location_x: f32,
+    pressed_location_y: f32,
+    moved_amount_x: f32,
+    moved_amount_y: f32,
 }
 
 impl Camera {
     pub fn new(x: f32, y: f32, w: f32, h: f32) -> Camera {
         Camera {
             x, y, w, h,
+            pressed_location_x: 0.0,
+            pressed_location_y: 0.0,
+            moved_amount_x: 0.0,
+            moved_amount_y: 0.0,
         }
     }
 
@@ -47,5 +55,25 @@ impl Camera {
 
         self.w *= zoom_factor;
         self.h *= zoom_factor;
+    }
+
+    pub fn press(&mut self, x: f32, y: f32) {
+        self.pressed_location_x = x;
+        self.pressed_location_y = y;
+        self.moved_amount_x = 0.0;
+        self.moved_amount_y = 0.0;
+    }
+
+    pub fn shift(&mut self, x: f32, y: f32) {
+        let scl_x = 2.0 / self.w;
+        let scl_y = 2.0 / self.h;
+        let new_cam_x = (self.pressed_location_x - x) / scl_x + self.x-self.moved_amount_x;
+        let new_cam_y = (self.pressed_location_y - y) / scl_y + self.y-self.moved_amount_y;
+        
+        self.moved_amount_x += new_cam_x-self.x;
+        self.moved_amount_y += new_cam_y-self.y;
+
+        self.x = new_cam_x;
+        self.y = new_cam_y;
     }
 }

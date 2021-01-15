@@ -26,31 +26,25 @@ textures:
       - 0
       - 16
       - 24
+  -
+    name: "castle"
+    bounds:
+      - 48
+      - 0
+      - 16
+      - 16
 tiles:
   -
     texture: "dirt"
-    r: 1.0
-    g: 1.0
-    b: 1.0
-    x_off: 0.0
     y_off: -8.0
-    x_scl: 1.0
     y_scl: 1.5
   -
     texture: "sand"
-    r: 1.0
-    g: 1.0
-    b: 1.0
-    x_off: 0.0
     y_off: -8.0
-    x_scl: 1.0
     y_scl: 1.5
   -
     texture: "stone"
-    r: 1.0
-    g: 1.0
-    b: 1.0
-    x_off: 0.0
     y_off: -8.0
-    x_scl: 1.0
     y_scl: 1.5
+  -
+    texture: "castle"

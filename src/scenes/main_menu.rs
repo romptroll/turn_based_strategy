@@ -1,5 +1,7 @@
+use engine::{core::window::Window, game::GameData, gui::gui::GUI, scene::Scene};
+
 /*
- *   Copyright (c) 2020 Ludwig Bogsveen
+ *   Copyright (c) 2021 Ludwig Bogsveen
  *   All rights reserved.
 
  *   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,6 +23,21 @@
  *   SOFTWARE.
  */
 
-pub mod editor;
-pub mod game;
-pub mod main_menu;
+pub struct MainMenuScene {
+    gui: GUI,
+    
+}
+
+impl MainMenuScene {
+    pub fn new(win: &mut Window) -> MainMenuScene {
+        MainMenuScene {
+            gui: GUI::new(win),
+        }
+    }
+}
+
+impl Scene for MainMenuScene {
+    fn on_render(&mut self, _gd: &mut GameData) {
+        
+    }
+}
